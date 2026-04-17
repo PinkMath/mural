@@ -42,7 +42,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "type-check": "tsc --noEmit --project tsconfig.app.json",
-    "predeploy": "npm install build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d out"
   },
   "type": "module",
