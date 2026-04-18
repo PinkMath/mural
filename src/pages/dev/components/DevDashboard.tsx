@@ -76,7 +76,7 @@ const DevDashboard = ({ logout }: Props) => {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <i className="ri-loader-4-line text-[#00ffcc] text-3xl animate-spin" />
+          <i className="ri-loader-4-line text-[#C2003E] text-3xl animate-spin" />
           <p className="text-white/30 text-xs tracking-widest uppercase">Carregando mural...</p>
         </div>
       </div>
@@ -90,27 +90,23 @@ const DevDashboard = ({ logout }: Props) => {
       <header className="border-b border-white/8 px-4 md:px-8 h-14 flex items-center justify-between bg-[#0d0d0d] sticky top-0 z-40 flex-shrink-0">
         {/* Left */}
         <div className="flex items-center gap-3">
-          {/* Mobile: hamburger to open month drawer */}
           <button
             onClick={() => setSidebarOpen(true)}
-            className="md:hidden w-8 h-8 flex items-center justify-center text-white/40 hover:text-[#00ffcc] transition-colors cursor-pointer"
+            className="md:hidden w-8 h-8 flex items-center justify-center text-white/40 hover:text-[#C2003E] transition-colors cursor-pointer"
           >
             <i className="ri-menu-3-line text-base" />
           </button>
-
-          <div className="w-6 h-6 flex items-center justify-center border border-[#00ffcc]/20 flex-shrink-0">
-            <i className="ri-shield-keyhole-line text-[#00ffcc]/50 text-xs" />
+          <div className="w-6 h-6 flex items-center justify-center border border-[#C2003E]/20 flex-shrink-0">
+            <i className="ri-shield-keyhole-line text-[#C2003E]/50 text-xs" />
           </div>
-          <span className="bebas text-[#00ffcc]/70 tracking-[0.3em] text-base">Painel Dev</span>
+          <span className="bebas text-[#C2003E]/70 tracking-[0.3em] text-base">Painel Dev</span>
           <span className="hidden sm:inline text-white/15 text-xs">|</span>
           <span className="hidden sm:inline text-white/25 text-xs tabular-nums">{totalPhotos} fotos</span>
         </div>
-
-        {/* Right */}
         <div className="flex items-center gap-3">
           <Link
             to="/"
-            className="text-white/30 hover:text-[#00ffcc] text-xs tracking-widest uppercase transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+            className="text-white/30 hover:text-[#C2003E] text-xs tracking-widest uppercase transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
           >
             <i className="ri-eye-line text-sm" />
             <span className="hidden sm:inline">Ver site</span>
@@ -152,16 +148,17 @@ const DevDashboard = ({ logout }: Props) => {
                   onClick={() => selectMonth(i)}
                   className={`w-full flex items-center justify-between px-4 py-3 text-left transition-all cursor-pointer ${
                     activeMonth === i
-                      ? 'bg-[#00ffcc]/8 text-white border-r-2 border-[#00ffcc]/50'
+                      ? 'bg-[#C2003E]/8 text-white border-r-2 border-[#C2003E]/50'
                       : 'text-white/35 hover:text-white/60 hover:bg-white/3'
                   }`}
                 >
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2">
                     <span className="text-white/20 text-[10px] tabular-nums">{String(m.month).padStart(2, '0')}</span>
+                    <span className="text-white/15 text-[10px]">/</span>
                     <span className="text-xs tracking-wide">{m.label}</span>
                   </div>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                    m.photos.length > 0 ? 'bg-[#00ffcc]/10 text-[#00ffcc]/60' : 'text-white/15'
+                    m.photos.length > 0 ? 'bg-[#C2003E]/10 text-[#C2003E]/60' : 'text-white/15'
                   }`}>
                     {m.photos.length}
                   </span>
@@ -185,16 +182,17 @@ const DevDashboard = ({ logout }: Props) => {
                 onClick={() => selectMonth(i)}
                 className={`w-full flex items-center justify-between px-4 py-3 text-left transition-all cursor-pointer ${
                   activeMonth === i
-                    ? 'bg-[#00ffcc]/8 text-white border-r border-[#00ffcc]/40'
+                    ? 'bg-[#C2003E]/8 text-white border-r border-[#C2003E]/40'
                     : 'text-white/35 hover:text-white/60 hover:bg-white/3'
                 }`}
               >
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2">
                   <span className="text-white/20 text-[10px] tabular-nums">{String(m.month).padStart(2, '0')}</span>
+                  <span className="text-white/15 text-[10px]">/</span>
                   <span className="text-xs tracking-wide">{m.label}</span>
                 </div>
                 <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                  m.photos.length > 0 ? 'bg-[#00ffcc]/10 text-[#00ffcc]/50' : 'text-white/15'
+                  m.photos.length > 0 ? 'bg-[#C2003E]/10 text-[#C2003E]/50' : 'text-white/15'
                 }`}>
                   {m.photos.length}
                 </span>
@@ -215,15 +213,17 @@ const DevDashboard = ({ logout }: Props) => {
               <button
                 key={m.month}
                 onClick={() => selectMonth(i)}
-                className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 text-[11px] uppercase tracking-wide transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
+                className={`flex-shrink-0 flex items-center gap-1 px-3 py-1.5 text-[11px] uppercase tracking-wide transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                   activeMonth === i
-                    ? 'bg-[#00ffcc]/15 text-[#00ffcc] border border-[#00ffcc]/30'
+                    ? 'bg-[#C2003E]/15 text-[#C2003E] border border-[#C2003E]/30'
                     : 'text-white/30 border border-white/8 hover:text-white/60'
                 }`}
               >
-                {m.label}
+                <span className="text-[9px] tabular-nums opacity-60">{String(m.month).padStart(2, '0')}</span>
+                <span className="opacity-30 text-[9px]">/</span>
+                <span>{m.label}</span>
                 {m.photos.length > 0 && (
-                  <span className="text-[9px] bg-[#00ffcc]/20 text-[#00ffcc]/70 px-1 rounded-full">
+                  <span className="text-[9px] bg-[#C2003E]/20 text-[#C2003E]/70 px-1 rounded-full">
                     {m.photos.length}
                   </span>
                 )}
@@ -237,9 +237,11 @@ const DevDashboard = ({ logout }: Props) => {
             {/* Month header */}
             <div className="flex items-start justify-between gap-3 mb-5">
               <div className="min-w-0">
-                <h2 className="bebas text-white text-2xl md:text-3xl tracking-[0.05em] leading-none">
+                <h2 className="bebas text-white text-2xl md:text-3xl tracking-[0.05em] leading-none flex items-baseline gap-2">
+                  <span className="text-white/25">{String(currentMonth.month).padStart(2, '0')}</span>
+                  <span className="text-white/20 text-xl">/</span>
                   {currentMonth.label}
-                  <span className="text-white/20 ml-2 text-xl md:text-2xl">2026</span>
+                  <span className="text-white/20 ml-1 text-xl md:text-2xl">2026</span>
                 </h2>
                 <p className="text-white/25 text-xs mt-1 tracking-widest">
                   {currentMonth.photos.length === 0
@@ -261,7 +263,7 @@ const DevDashboard = ({ logout }: Props) => {
               </button>
             </div>
 
-            {/* Tabs — horizontally scrollable */}
+            {/* Tabs */}
             <div className="overflow-x-auto mb-5 -mx-4 md:mx-0 px-4 md:px-0">
               <div className="flex items-center gap-1 bg-white/3 p-1 w-max min-w-full md:min-w-0 md:w-fit">
                 {TABS.map((t) => (
@@ -272,7 +274,7 @@ const DevDashboard = ({ logout }: Props) => {
                       tab === t.key
                         ? t.key === 'backup'
                           ? 'bg-amber-400 text-black font-bold'
-                          : 'bg-[#00ffcc] text-black font-bold'
+                          : 'bg-[#C2003E] text-white font-bold'
                         : 'text-white/40 hover:text-white/70'
                     }`}
                   >
@@ -283,152 +285,149 @@ const DevDashboard = ({ logout }: Props) => {
               </div>
             </div>
 
-            {/* ── Tab content — key triggers remount + enter animation ── */}
+            {/* Tab content */}
             <div key={tab} className="animate-tab-enter">
 
-            {tab === 'upload' && (
-              <PhotoUploader
-                monthLabel={currentMonth.label}
-                onPhotosReady={handleUploadReady}
-              />
-            )}
+              {tab === 'upload' && (
+                <PhotoUploader
+                  monthLabel={currentMonth.label}
+                  onPhotosReady={handleUploadReady}
+                />
+              )}
 
-            {tab === 'add-url' && (
-              <div className="bg-white/3 border border-white/8 p-4 md:p-5">
-                <p className="text-[#00ffcc]/50 text-xs tracking-[0.25em] uppercase mb-4 flex items-center gap-2">
-                  <i className="ri-add-circle-line" /> Adicionar por URL
-                </p>
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-white/25 text-xs">URL da imagem *</label>
-                    <input
-                      type="url"
-                      value={addUrl}
-                      onChange={(e) => { setAddUrl(e.target.value); setAddError(''); }}
-                      placeholder="https://..."
-                      className="bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 outline-none focus:border-[#00ffcc]/40 transition-colors placeholder:text-white/15 w-full"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-white/25 text-xs">Legenda (opcional)</label>
-                    <input
-                      type="text"
-                      value={addCaption}
-                      onChange={(e) => setAddCaption(e.target.value)}
-                      placeholder="Ex: Rolê do Carnaval..."
-                      className="bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 outline-none focus:border-[#00ffcc]/40 transition-colors placeholder:text-white/15 w-full"
-                    />
-                  </div>
-                  {addError && (
-                    <div className="flex items-start gap-2 text-red-400 text-xs bg-red-500/10 border border-red-500/20 px-3 py-2">
-                      <i className="ri-error-warning-line flex-shrink-0 mt-0.5" /> <span>{addError}</span>
+              {tab === 'add-url' && (
+                <div className="bg-white/3 border border-white/8 p-4 md:p-5">
+                  <p className="text-[#C2003E]/50 text-xs tracking-[0.25em] uppercase mb-4 flex items-center gap-2">
+                    <i className="ri-add-circle-line" /> Adicionar por URL
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-white/25 text-xs">URL da imagem *</label>
+                      <input
+                        type="url"
+                        value={addUrl}
+                        onChange={(e) => { setAddUrl(e.target.value); setAddError(''); }}
+                        placeholder="https://..."
+                        className="bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 outline-none focus:border-[#C2003E]/40 transition-colors placeholder:text-white/15 w-full"
+                      />
                     </div>
-                  )}
-                  {addSuccess && (
-                    <div className="flex items-center gap-2 text-[#00ffcc] text-xs bg-[#00ffcc]/10 border border-[#00ffcc]/20 px-3 py-2">
-                      <i className="ri-check-line" /> Foto adicionada!
+                    <div className="flex flex-col gap-1.5">
+                      <label className="text-white/25 text-xs">Legenda (opcional)</label>
+                      <input
+                        type="text"
+                        value={addCaption}
+                        onChange={(e) => setAddCaption(e.target.value)}
+                        placeholder="Ex: Rolê do Carnaval..."
+                        className="bg-white/5 border border-white/10 text-white text-sm px-3 py-2.5 outline-none focus:border-[#C2003E]/40 transition-colors placeholder:text-white/15 w-full"
+                      />
                     </div>
-                  )}
-                  <button
-                    onClick={handleAddUrl}
-                    className="bg-[#00ffcc] text-black text-xs font-bold uppercase tracking-[0.2em] px-5 py-2.5 hover:bg-white transition-colors cursor-pointer whitespace-nowrap flex items-center gap-2 self-start"
-                  >
-                    <i className="ri-image-add-line" /> Adicionar
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {tab === 'manage' && (
-              <div>
-                <p className="text-white/30 text-xs tracking-[0.25em] uppercase mb-4">
-                  Fotos em {currentMonth.label}
-                </p>
-                {currentMonth.photos.length === 0 ? (
-                  <div className="border border-dashed border-white/8 py-14 flex flex-col items-center gap-3 text-white/20">
-                    <i className="ri-image-line text-4xl" />
-                    <p className="text-xs tracking-widest uppercase">Nenhuma foto adicionada</p>
+                    {addError && (
+                      <div className="flex items-start gap-2 text-red-400 text-xs bg-red-500/10 border border-red-500/20 px-3 py-2">
+                        <i className="ri-error-warning-line flex-shrink-0 mt-0.5" /> <span>{addError}</span>
+                      </div>
+                    )}
+                    {addSuccess && (
+                      <div className="flex items-center gap-2 text-[#C2003E] text-xs bg-[#C2003E]/10 border border-[#C2003E]/20 px-3 py-2">
+                        <i className="ri-check-line" /> Foto adicionada!
+                      </div>
+                    )}
                     <button
-                      onClick={() => setTab('upload')}
-                      className="mt-2 text-[#00ffcc]/40 hover:text-[#00ffcc] text-xs tracking-widest uppercase transition-colors cursor-pointer"
+                      onClick={handleAddUrl}
+                      className="bg-[#C2003E] text-white text-xs font-bold uppercase tracking-[0.2em] px-5 py-2.5 hover:bg-white transition-colors cursor-pointer whitespace-nowrap flex items-center gap-2 self-start"
                     >
-                      <i className="ri-folder-upload-line mr-1.5" />
-                      Enviar pasta
+                      <i className="ri-image-add-line" /> Adicionar
                     </button>
                   </div>
-                ) : (
-                  <div className="flex flex-col gap-2">
-                    {currentMonth.photos.map((photo) => (
-                      <div key={photo.id} className="flex items-center gap-3 bg-white/3 border border-white/5 p-3">
-                        {/* Thumb */}
-                        <div className="w-12 h-12 md:w-14 md:h-14 flex-shrink-0 overflow-hidden bg-white/5">
-                          <img
-                            src={photo.url}
-                            alt={photo.caption}
-                            className="w-full h-full object-cover object-top"
-                            onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
-                          />
-                        </div>
+                </div>
+              )}
 
-                        {/* Info */}
-                        <div className="flex-1 min-w-0">
-                          {editingId === photo.id ? (
-                            <div className="flex items-center gap-2">
-                              <input
-                                type="text"
-                                value={editCaption}
-                                onChange={(e) => setEditCaption(e.target.value)}
-                                placeholder="Legenda..."
-                                className="flex-1 min-w-0 bg-white/5 border border-white/20 text-white text-xs px-2 py-1.5 outline-none focus:border-[#00ffcc]/40"
-                              />
-                              <button onClick={() => handleSaveEdit(photo.id)} className="text-[#00ffcc] cursor-pointer w-7 h-7 flex-shrink-0 flex items-center justify-center">
-                                <i className="ri-check-line text-sm" />
+              {tab === 'manage' && (
+                <div>
+                  <p className="text-white/30 text-xs tracking-[0.25em] uppercase mb-4">
+                    Fotos em {currentMonth.label}
+                  </p>
+                  {currentMonth.photos.length === 0 ? (
+                    <div className="border border-dashed border-white/8 py-14 flex flex-col items-center gap-3 text-white/20">
+                      <i className="ri-image-line text-4xl" />
+                      <p className="text-xs tracking-widest uppercase">Nenhuma foto adicionada</p>
+                      <button
+                        onClick={() => setTab('upload')}
+                        className="mt-2 text-[#C2003E]/40 hover:text-[#C2003E] text-xs tracking-widest uppercase transition-colors cursor-pointer"
+                      >
+                        <i className="ri-folder-upload-line mr-1.5" />
+                        Enviar pasta
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      {currentMonth.photos.map((photo) => (
+                        <div key={photo.id} className="flex items-center gap-3 bg-white/3 border border-white/5 p-3">
+                          <div className="w-12 h-12 md:w-14 md:h-14 flex-shrink-0 overflow-hidden bg-white/5">
+                            <img
+                              src={photo.url}
+                              alt={photo.caption}
+                              className="w-full h-full object-cover object-top"
+                              onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0'; }}
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            {editingId === photo.id ? (
+                              <div className="flex items-center gap-2">
+                                <input
+                                  type="text"
+                                  value={editCaption}
+                                  onChange={(e) => setEditCaption(e.target.value)}
+                                  placeholder="Legenda..."
+                                  className="flex-1 min-w-0 bg-white/5 border border-white/20 text-white text-xs px-2 py-1.5 outline-none focus:border-[#C2003E]/40"
+                                />
+                                <button onClick={() => handleSaveEdit(photo.id)} className="text-[#C2003E] cursor-pointer w-7 h-7 flex-shrink-0 flex items-center justify-center">
+                                  <i className="ri-check-line text-sm" />
+                                </button>
+                                <button onClick={() => setEditingId(null)} className="text-white/30 hover:text-white/60 cursor-pointer w-7 h-7 flex-shrink-0 flex items-center justify-center">
+                                  <i className="ri-close-line text-sm" />
+                                </button>
+                              </div>
+                            ) : (
+                              <>
+                                <p className="text-white/60 text-xs truncate mb-0.5">
+                                  {photo.caption || <span className="text-white/20 italic">sem legenda</span>}
+                                </p>
+                                <p className="text-white/15 text-[10px] truncate">
+                                  {photo.url.startsWith('data:') ? 'Arquivo local' : photo.url}
+                                </p>
+                              </>
+                            )}
+                          </div>
+                          {editingId !== photo.id && (
+                            <div className="flex items-center gap-1 flex-shrink-0">
+                              <button
+                                onClick={() => handleStartEdit(photo)}
+                                className="w-8 h-8 flex items-center justify-center text-white/25 hover:text-[#C2003E] transition-colors cursor-pointer"
+                              >
+                                <i className="ri-pencil-line text-sm" />
                               </button>
-                              <button onClick={() => setEditingId(null)} className="text-white/30 hover:text-white/60 cursor-pointer w-7 h-7 flex-shrink-0 flex items-center justify-center">
-                                <i className="ri-close-line text-sm" />
+                              <button
+                                onClick={() => removePhoto(activeMonth, photo.id)}
+                                className="w-8 h-8 flex items-center justify-center text-red-400/30 hover:text-red-400 transition-colors cursor-pointer"
+                              >
+                                <i className="ri-delete-bin-line text-sm" />
                               </button>
                             </div>
-                          ) : (
-                            <>
-                              <p className="text-white/60 text-xs truncate mb-0.5">
-                                {photo.caption || <span className="text-white/20 italic">sem legenda</span>}
-                              </p>
-                              <p className="text-white/15 text-[10px] truncate">
-                                {photo.url.startsWith('data:') ? '📁 Arquivo local' : photo.url}
-                              </p>
-                            </>
                           )}
                         </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
 
-                        {editingId !== photo.id && (
-                          <div className="flex items-center gap-1 flex-shrink-0">
-                            <button
-                              onClick={() => handleStartEdit(photo)}
-                              className="w-8 h-8 flex items-center justify-center text-white/25 hover:text-[#00ffcc] transition-colors cursor-pointer"
-                            >
-                              <i className="ri-pencil-line text-sm" />
-                            </button>
-                            <button
-                              onClick={() => removePhoto(activeMonth, photo.id)}
-                              className="w-8 h-8 flex items-center justify-center text-red-400/30 hover:text-red-400 transition-colors cursor-pointer"
-                            >
-                              <i className="ri-delete-bin-line text-sm" />
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
+              {tab === 'backup' && (
+                <BackupPanel months={months} onImport={restoreBackup} />
+              )}
 
-            {tab === 'backup' && (
-              <BackupPanel months={months} onImport={restoreBackup} />
-            )}
 
-            </div>{/* end animate-tab-enter */}
 
+            </div>
           </div>
         </main>
       </div>

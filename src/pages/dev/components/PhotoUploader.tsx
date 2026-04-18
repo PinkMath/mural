@@ -168,8 +168,8 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
   const errorCount = progress.filter((p) => p.status === 'error').length;
 
   return (
-    <div className="bg-white/3 border border-[#00ffcc]/15 p-5">
-      <p className="text-[#00ffcc]/60 text-xs tracking-[0.25em] uppercase mb-4 flex items-center gap-2">
+    <div className="bg-white/3 border border-[#C2003E]/15 p-5">
+      <p className="text-[#C2003E]/60 text-xs tracking-[0.25em] uppercase mb-4 flex items-center gap-2">
         <i className="ri-folder-upload-line text-base" />
         Enviar pasta ou ZIP — {monthLabel}
       </p>
@@ -182,7 +182,7 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
           onDrop={handleDrop}
           className={`border-2 border-dashed transition-all duration-300 p-8 flex flex-col items-center gap-4 mb-4 ${
             dragging
-              ? 'border-[#00ffcc]/60 bg-[#00ffcc]/5'
+              ? 'border-[#C2003E]/60 bg-[#C2003E]/5'
               : 'border-white/10 hover:border-white/25'
           }`}
         >
@@ -221,14 +221,14 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
             <button
               type="button"
               onClick={() => folderRef.current?.click()}
-              className="flex-1 flex items-center justify-center gap-2 border border-white/15 text-white/50 hover:border-[#00ffcc]/40 hover:text-[#00ffcc] text-xs uppercase tracking-[0.2em] py-2.5 transition-all cursor-pointer whitespace-nowrap"
+              className="flex-1 flex items-center justify-center gap-2 border border-white/15 text-white/50 hover:border-[#C2003E]/40 hover:text-[#C2003E] text-xs uppercase tracking-[0.2em] py-2.5 transition-all cursor-pointer whitespace-nowrap"
             >
               <i className="ri-folder-open-line text-sm" /> Pasta
             </button>
             <button
               type="button"
               onClick={() => zipRef.current?.click()}
-              className="flex-1 flex items-center justify-center gap-2 border border-white/15 text-white/50 hover:border-[#00ffcc]/40 hover:text-[#00ffcc] text-xs uppercase tracking-[0.2em] py-2.5 transition-all cursor-pointer whitespace-nowrap"
+              className="flex-1 flex items-center justify-center gap-2 border border-white/15 text-white/50 hover:border-[#C2003E]/40 hover:text-[#C2003E] text-xs uppercase tracking-[0.2em] py-2.5 transition-all cursor-pointer whitespace-nowrap"
             >
               <i className="ri-file-zip-line text-sm" /> ZIP
             </button>
@@ -253,7 +253,7 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
           {progress.map((item, i) => (
             <div key={i} className="flex items-center gap-2 px-2 py-1">
               <span className={`flex-shrink-0 w-4 h-4 flex items-center justify-center text-xs ${
-                item.status === 'done' ? 'text-[#00ffcc]'
+                item.status === 'done' ? 'text-[#C2003E]'
                 : item.status === 'error' ? 'text-red-400'
                 : item.status === 'processing' ? 'text-yellow-400'
                 : 'text-white/20'
@@ -278,7 +278,7 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
           </div>
           <div className="h-1 bg-white/5 w-full">
             <div
-              className="h-full bg-[#00ffcc] transition-all duration-300"
+              className="h-full bg-[#C2003E] transition-all duration-300"
               style={{ width: `${progress.length > 0 ? ((doneCount + errorCount) / progress.length) * 100 : 0}%` }}
             />
           </div>
@@ -287,10 +287,10 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
 
       {/* Success */}
       {done && !processing && (
-        <div className="flex items-center justify-between bg-[#00ffcc]/10 border border-[#00ffcc]/20 px-3 py-2">
+        <div className="flex items-center justify-between bg-[#C2003E]/10 border border-[#C2003E]/20 px-3 py-2">
           <div className="flex items-center gap-2">
-            <i className="ri-check-double-line text-[#00ffcc] text-sm" />
-            <p className="text-[#00ffcc] text-xs">
+            <i className="ri-check-double-line text-[#C2003E] text-sm" />
+            <p className="text-[#C2003E] text-xs">
               {doneCount} foto{doneCount !== 1 ? 's' : ''} adicionada{doneCount !== 1 ? 's' : ''} em{' '}
               <strong>{monthLabel}</strong>!
               {errorCount > 0 && <span className="text-red-400 ml-1">({errorCount} com erro)</span>}
@@ -298,7 +298,7 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
           </div>
           <button
             onClick={reset}
-            className="text-[#00ffcc]/40 hover:text-[#00ffcc] cursor-pointer whitespace-nowrap text-xs tracking-widest uppercase ml-4"
+            className="text-[#C2003E]/40 hover:text-[#C2003E] cursor-pointer whitespace-nowrap text-xs tracking-widest uppercase ml-4"
           >
             Enviar mais
           </button>
@@ -306,7 +306,7 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
       )}
 
       <p className="text-white/10 text-[10px] mt-3 leading-relaxed">
-        Formatos aceitos: JPG, PNG, WEBP, GIF &nbsp;·&nbsp; Imagens são comprimidas automaticamente &nbsp;·&nbsp; ZIP será descompactado
+        Formatos aceitos: JPG, PNG, GIF &nbsp;·&nbsp; Convertidas automaticamente para WebP (menor tamanho, mesma qualidade) &nbsp;·&nbsp; ZIP será descompactado
       </p>
     </div>
   );

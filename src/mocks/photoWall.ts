@@ -17,6 +17,21 @@ export const monthLabels = [
   'Setembro', 'Outubro', 'Novembro', 'Dezembro',
 ];
 
+export const monthSlugs = [
+  'janeiro', 'fevereiro', 'marco', 'abril',
+  'maio', 'junho', 'julho', 'agosto',
+  'setembro', 'outubro', 'novembro', 'dezembro',
+];
+
+/** Returns slug for a given month number (1-12) */
+export const getMonthSlug = (month: number): string => monthSlugs[month - 1] ?? 'janeiro';
+
+/** Returns month number (1-12) for a given slug, or null if not found */
+export const getMonthBySlug = (slug: string): number | null => {
+  const idx = monthSlugs.indexOf(slug.toLowerCase());
+  return idx >= 0 ? idx + 1 : null;
+};
+
 export const initialPhotoWall: MonthData[] = [
   {
     month: 1,

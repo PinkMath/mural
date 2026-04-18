@@ -26,7 +26,7 @@ body {
   background: #0a0a0a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #00ffcc;
+  background: #C2003E;
   border-radius: 2px;
 }
 
@@ -39,7 +39,7 @@ body {
 }
 
 .text-stroke {
-  -webkit-text-stroke: 1px #00ffcc;
+  -webkit-text-stroke: 1px #C2003E;
   color: transparent;
 }
 
@@ -56,6 +56,11 @@ body {
   pointer-events: none;
   z-index: 9999;
   opacity: 0.4;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
 
 @keyframes float-up {
@@ -113,6 +118,38 @@ body {
   will-change: transform;
 }
 
+/* Ken Burns — 4 directional variants */
+@keyframes hero-kb-a {
+  0%   { transform: scale(1)    translate(0%,    0%); }
+  50%  { transform: scale(1.12) translate(-1.5%, -1%); }
+  100% { transform: scale(1)    translate(0%,    0%); }
+}
+@keyframes hero-kb-b {
+  0%   { transform: scale(1.1)  translate(1.5%,  0.5%); }
+  50%  { transform: scale(1)    translate(-0.5%, 1%); }
+  100% { transform: scale(1.1)  translate(1.5%,  0.5%); }
+}
+@keyframes hero-kb-c {
+  0%   { transform: scale(1)    translate(1%,   0.5%); }
+  50%  { transform: scale(1.1)  translate(-1%,  -1%); }
+  100% { transform: scale(1)    translate(1%,   0.5%); }
+}
+@keyframes hero-kb-d {
+  0%   { transform: scale(1.08) translate(-1%,  -0.5%); }
+  50%  { transform: scale(1)    translate(1%,    1%); }
+  100% { transform: scale(1.08) translate(-1%,  -0.5%); }
+}
+
+/* Hero progress bar */
+@keyframes hero-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.hero-progress {
+  animation: hero-progress linear both;
+  transform-origin: left center;
+}
+
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -133,7 +170,7 @@ body {
   display: block;
   width: 0;
   height: 2px;
-  background: #00ffcc;
+  background: #C2003E;
   transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .nav-link:hover::after {

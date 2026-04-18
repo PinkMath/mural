@@ -95,11 +95,11 @@ const BackupPanel = ({ months, onImport }: Props) => {
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-white/3 border border-white/8 p-4 flex flex-col gap-1">
-          <span className="text-[#00ffcc]/60 text-xs tracking-[0.25em] uppercase">Fotos salvas</span>
+          <span className="text-[#C2003E]/60 text-xs tracking-[0.25em] uppercase">Fotos salvas</span>
           <span className="text-white text-2xl font-light tabular-nums">{totalPhotos.toLocaleString('pt-BR')}</span>
         </div>
         <div className="bg-white/3 border border-white/8 p-4 flex flex-col gap-1">
-          <span className="text-[#00ffcc]/60 text-xs tracking-[0.25em] uppercase">Meses com fotos</span>
+          <span className="text-[#C2003E]/60 text-xs tracking-[0.25em] uppercase">Meses com fotos</span>
           <span className="text-white text-2xl font-light tabular-nums">{totalMonths} / 12</span>
         </div>
       </div>
@@ -107,8 +107,8 @@ const BackupPanel = ({ months, onImport }: Props) => {
       {/* Export block */}
       <div className="bg-white/3 border border-white/8 p-5 flex flex-col gap-4">
         <div className="flex items-start gap-3">
-          <div className="w-9 h-9 flex items-center justify-center border border-[#00ffcc]/20 flex-shrink-0">
-            <i className="ri-download-cloud-2-line text-[#00ffcc]/60 text-lg" />
+          <div className="w-9 h-9 flex items-center justify-center border border-[#C2003E]/20 flex-shrink-0">
+            <i className="ri-download-cloud-2-line text-[#C2003E]/60 text-lg" />
           </div>
           <div>
             <p className="text-white/70 text-sm tracking-wide mb-0.5">Exportar backup</p>
@@ -119,7 +119,7 @@ const BackupPanel = ({ months, onImport }: Props) => {
         </div>
 
         {exportDone && (
-          <div className="flex items-center gap-2 text-[#00ffcc] text-xs bg-[#00ffcc]/8 border border-[#00ffcc]/20 px-3 py-2">
+          <div className="flex items-center gap-2 text-[#C2003E] text-xs bg-[#C2003E]/8 border border-[#C2003E]/20 px-3 py-2">
             <i className="ri-check-double-line" /> Download iniciado! Guarde o arquivo em lugar seguro.
           </div>
         )}
@@ -127,7 +127,7 @@ const BackupPanel = ({ months, onImport }: Props) => {
         <button
           onClick={handleExport}
           disabled={exporting || totalPhotos === 0}
-          className="bg-[#00ffcc] text-black text-xs font-bold uppercase tracking-[0.25em] px-6 py-3 hover:bg-white transition-colors cursor-pointer self-start disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap flex items-center gap-2"
+          className="bg-[#C2003E] text-white text-xs font-bold uppercase tracking-[0.25em] px-6 py-3 hover:bg-white transition-colors cursor-pointer w-full sm:w-auto sm:self-start disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {exporting ? (
             <><i className="ri-loader-4-line animate-spin" /> Preparando...</>
@@ -161,7 +161,7 @@ const BackupPanel = ({ months, onImport }: Props) => {
         )}
 
         {importSuccess && (
-          <div className="flex items-center gap-2 text-[#00ffcc] text-xs bg-[#00ffcc]/8 border border-[#00ffcc]/20 px-3 py-2">
+          <div className="flex items-center gap-2 text-[#C2003E] text-xs bg-[#C2003E]/8 border border-[#C2003E]/20 px-3 py-2">
             <i className="ri-check-double-line" /> Backup restaurado com sucesso!
           </div>
         )}
@@ -174,16 +174,16 @@ const BackupPanel = ({ months, onImport }: Props) => {
               Arquivo contém <strong>{confirmImport.reduce((a, m) => a + m.photos.length, 0)}</strong> fotos em <strong>{confirmImport.filter(m => m.photos.length > 0).length}</strong> meses.
               Isso vai <strong>substituir</strong> os dados atuais.
             </p>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
               <button
                 onClick={handleConfirmImport}
-                className="bg-amber-400 text-black text-xs font-bold uppercase tracking-[0.2em] px-4 py-2 hover:bg-white transition-colors cursor-pointer whitespace-nowrap"
+                className="bg-amber-400 text-black text-xs font-bold uppercase tracking-[0.2em] px-4 py-2 hover:bg-white transition-colors cursor-pointer flex items-center justify-center gap-1.5"
               >
-                <i className="ri-check-line mr-1.5" /> Confirmar restauração
+                <i className="ri-check-line" /> Confirmar restauração
               </button>
               <button
                 onClick={() => setConfirmImport(null)}
-                className="border border-white/15 text-white/40 hover:text-white/70 text-xs uppercase tracking-[0.2em] px-4 py-2 transition-colors cursor-pointer whitespace-nowrap"
+                className="border border-white/15 text-white/40 hover:text-white/70 text-xs uppercase tracking-[0.2em] px-4 py-2 transition-colors cursor-pointer flex items-center justify-center"
               >
                 Cancelar
               </button>
@@ -201,7 +201,7 @@ const BackupPanel = ({ months, onImport }: Props) => {
         <button
           onClick={() => fileRef.current?.click()}
           disabled={importing}
-          className="border border-amber-400/30 text-amber-400/70 hover:text-amber-400 hover:border-amber-400/60 text-xs uppercase tracking-[0.2em] px-5 py-3 transition-colors cursor-pointer self-start disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap flex items-center gap-2"
+          className="border border-amber-400/30 text-amber-400/70 hover:text-amber-400 hover:border-amber-400/60 text-xs uppercase tracking-[0.2em] px-5 py-3 transition-colors cursor-pointer w-full sm:w-auto sm:self-start disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {importing ? (
             <><i className="ri-loader-4-line animate-spin" /> Lendo...</>
