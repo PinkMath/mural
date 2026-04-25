@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react';
+import { db } from '@/firebaseConfig';
+import { ref, set, push } from 'firebase/database';
 import { Link } from 'react-router-dom';
 import { usePhotoWall } from '@/hooks/usePhotoWall';
 import { MonthData, MonthPhoto } from '@/mocks/photoWall';
@@ -60,6 +62,18 @@ const DevDashboard = ({ logout }: Props) => {
     setAddUrl(''); setAddCaption('');
     setAddSuccess(true);
     setTimeout(() => setAddSuccess(false), 3000);
+
+    const novoRecado = { 
+      id: `url-${Date.now()}`, 
+      url: addUrl.trim(), 
+      caption: addCaption.trim() || undefined 
+    };
+
+    // SALVANDO NO FIREBASE
+    const dbRef = ref(db, `mural/meses/${activeMonth}/photos`);
+    push(dbRef, novoRecado); 
+
+    addPhoto(activeMonth, novoRecado);
   };
 
   const handleStartEdit = (photo: MonthPhoto) => { setEditingId(photo.id); setEditCaption(photo.caption ?? ''); };

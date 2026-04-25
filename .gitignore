@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+src/firebase.ts
 
 node_modules
 dist
@@ -14,11 +15,11 @@ dist-ssr
 
 # Editor directories and files
 .vscode/*
-          !.vscode/extensions.json
-          .idea
-          .DS_Store
-        *.suo
-        *.ntvs*
-        *.njsproj
-        *.sln
-        *.sw?
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
