@@ -2,7 +2,7 @@
 
 Um mural fotográfico interativo e elegante, desenvolvido para imortalizar momentos especiais. O projeto consome dados em tempo real do **Firebase Realtime Database**, com foco em performance mobile e design minimalista.
 
-Veja o site [aqui](https://pinkmath.github.io/mural/)
+# Veja o site [aqui](https://pinkmath.github.io/mural/)
 
 ## ✨ Funcionalidades
 
@@ -27,9 +27,10 @@ Veja o site [aqui](https://pinkmath.github.io/mural/)
 ## 🚀 Como Executar o Projeto
 
 1. **Clone o repositório:**
-   ```bash
-   git clone [https://github.com/PinkMath/mural.git](https://github.com/PinkMath/mural.git)
-   cd mural
+```bash
+git clone [https://github.com/PinkMath/mural.git](https://github.com/PinkMath/mural.git)
+cd mural
+```
 
 2. **Instale as dependências:**
 ```bash
