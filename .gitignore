@@ -6,7 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-src/firebase.ts
+src/lib/
+src/lib/*
 
 node_modules
 dist

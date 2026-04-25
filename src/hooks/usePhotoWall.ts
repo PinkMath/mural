@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { initialPhotoWall, MonthData, MonthPhoto } from '@/mocks/photoWall';
-import { db } from '@/firebase';
+import { db } from '@/lib/firebase';
 import { ref, onValue, set } from 'firebase/database';
 
 export const usePhotoWall = () => {
