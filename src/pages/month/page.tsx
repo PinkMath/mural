@@ -28,7 +28,7 @@ const photoWrapClass = (count: number, index: number) => {
 const PhotoGrid = ({ data, monthLabel }: { data: MonthPhoto[]; monthLabel: string }) => {
   const [lightbox, setLightbox] = useState<MonthPhoto | null>(null);
   const lbIndex = data.findIndex((p) => p.id === lightbox?.id);
-  const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.05 });
+  const { ref, isVisible } = useScrollReveal<HTMLDivElement>({ threshold: 0.01 });
   const count = data.length;
 
   return (
