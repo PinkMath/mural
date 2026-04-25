@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { initialPhotoWall, MonthData, MonthPhoto } from '@/mocks/photoWall';
-import { db } from '@/firebase'; // Importando a conexão que você criou
+import { db } from '@/firebase';
 import { ref, onValue, set } from 'firebase/database';
 
 export const usePhotoWall = () => {

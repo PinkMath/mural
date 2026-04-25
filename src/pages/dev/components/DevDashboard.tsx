@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { db } from '@/firebaseConfig';
+import { db } from '@/firebase';
 import { ref, set, push } from 'firebase/database';
 import { Link } from 'react-router-dom';
 import { usePhotoWall } from '@/hooks/usePhotoWall';
