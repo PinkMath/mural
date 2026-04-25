@@ -1,11 +1,9 @@
 // src/hooks/usePhotoDB.ts
 
-// Verifica se o arquivo é uma imagem
 export const isImageFile = (filename: string): boolean => {
   return /\.(jpg|jpeg|png|webp|gif)$/i.test(filename);
 };
 
-// Comprime a imagem e retorna uma string Base64
 export const compressImage = async (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -16,8 +14,8 @@ export const compressImage = async (file: File): Promise<string> => {
       img.onload = () => {
         const canvas = document.createElement('canvas');
         
-        // Define um tamanho máximo para não estourar o limite do Firebase (Base64 é pesado)
-        const MAX_WIDTH = 1000; 
+        // Reduzimos um pouco mais o limite para garantir fluidez no mobile
+        const MAX_WIDTH = 600; 
         let width = img.width;
         let height = img.height;
 
@@ -30,12 +28,21 @@ export const compressImage = async (file: File): Promise<string> => {
         canvas.height = height;
 
         const ctx = canvas.getContext('2d');
-        ctx?.drawImage(img, 0, 0, width, height);
+        if (!ctx) return reject(new Error('Falha ao obter contexto do Canvas'));
+
+        // Suavização de imagem para não perder qualidade ao reduzir
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
         
-        // Retorna em JPEG com qualidade 0.7 (70%) para economizar espaço
-        resolve(canvas.toDataURL('image/jpeg', 0.7));
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // A MÁGICA: Convertendo explicitamente para image/webp
+        // Qualidade 0.6 é o "ponto doce" entre nitidez e peso de arquivo
+        const webpDataUrl = canvas.toDataURL('image/webp', 0.5);
+        
+        resolve(webpDataUrl);
       };
-      img.onerror = () => reject(new Error('Erro ao carregar imagem para compressão'));
+      img.onerror = () => reject(new Error('Erro ao carregar imagem'));
     };
     reader.onerror = () => reject(new Error('Erro ao ler arquivo'));
   });
