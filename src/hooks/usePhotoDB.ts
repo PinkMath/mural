@@ -1,23 +1,23 @@
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import heic2any from "heic2any";
-import * as exifr from 'exifr';
+import * as exifr from "exifr";
 
 export const isImageFile = (filename: string): boolean => {
   return /\.(jpg|jpeg|png|webp|gif|heic|heif)$/i.test(filename);
 };
 
-const isHeicFile = (file: File): boolean => {
+export const isHeicFile = (file: File): boolean => {
   return /\.(heic|heif)$/i.test(file.name);
 };
 
 export const convertHeicToJpeg = async (file: File): Promise<File> => {
-  const convertedBlob = await heic2any({
+  const converted = await heic2any({
     blob: file,
     toType: "image/jpeg",
     quality: 0.85,
   });
 
-  const blob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
+  const blob = Array.isArray(converted) ? converted[0] : converted;
 
   return new File(
     [blob],
@@ -94,12 +94,28 @@ const convertToWebP = (file: File, quality = 0.8): Promise<File> => {
   });
 };
 
+export const prepareImageFile = async (file: File): Promise<File> => {
+  if (isHeicFile(file)) {
+    return await convertHeicToJpeg(file);
+  }
+
+  return file;
+};
+
 export const compressImage = async (file: File): Promise<string> => {
-  const fileToProcess = isHeicFile(file)
-    ? await convertHeicToJpeg(file)
-    : file;
+  if (isHeicFile(file)) {
+    try {
+      const jpegFile = await convertHeicToJpeg(file);
+      const webpFile = await convertToWebP(jpegFile, 0.8);
+      return await uploadToCloudinary(webpFile);
+    } catch (err) {
+      console.error("HEIC não suportado pelo navegador, tentando Cloudinary:", err);
 
-  const webpFile = await convertToWebP(fileToProcess, 0.8);
+      // fallback: sobe HEIC no Cloudinary, mas salva URL WEBP no Firebase
+      return await uploadToCloudinary(file);
+    }
+  }
 
+  const webpFile = await convertToWebP(file, 0.8);
   return await uploadToCloudinary(webpFile);
 };
