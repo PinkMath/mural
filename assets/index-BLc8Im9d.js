@@ -101,4 +101,4 @@ FECHA isso agora.
 Colar código aqui pode dar ruim.
 
 💀 Você foi avisado.`,`color: red; font-size: 22px; font-weight: bold; background: black; padding: 10px;`),(0,H.jsx)(Ae,{i18n:rt,children:(0,H.jsx)(Kr,{basename:`/mural/`,children:(0,H.jsx)(vv,{})})})}(0,lt.createRoot)(document.getElementById(`root`)).render((0,H.jsx)(f.StrictMode,{children:(0,H.jsx)(yv,{})}));
-//# sourceMappingURL=index-Cm-W-PHM.js.map
+//# sourceMappingURL=index-BLc8Im9d.js.map
