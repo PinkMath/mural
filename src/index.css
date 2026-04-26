@@ -219,3 +219,10 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .hero-bg-zoom {
+    animation: none;
+    transform: scale(1);
+  }
+}
