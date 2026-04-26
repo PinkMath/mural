@@ -10,7 +10,7 @@ const isHeicFile = (file: File): boolean => {
   return /\.(heic|heif)$/i.test(file.name);
 };
 
-const convertHeicToJpeg = async (file: File): Promise<File> => {
+export const convertHeicToJpeg = async (file: File): Promise<File> => {
   const convertedBlob = await heic2any({
     blob: file,
     toType: "image/jpeg",

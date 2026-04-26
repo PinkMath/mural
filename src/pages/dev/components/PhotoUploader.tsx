@@ -1,6 +1,6 @@
 import { useRef, useState, DragEvent } from 'react';
 import JSZip from 'jszip';
-import { compressImage, isImageFile, getImageDate } from '@/hooks/usePhotoDB';
+import { compressImage, convertHeicToJpeg, isImageFile, getImageDate } from '@/hooks/usePhotoDB';
 import { MonthPhoto } from '@/mocks/photoWall';
 
 interface Props {
@@ -104,8 +104,15 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
       try {
         const file = imageFiles[i];
 
-        const date = await getImageDate(file);
-        const url = await compressImage(file);
+        let fileToProcess = file;
+
+        // just dont delete it/srs
+        if (file.name.toLowerCase().endsWith(".heic") || file.name.toLowerCase().endsWith(".heif")) {
+          fileToProcess = await convertHeicToJpeg(file);
+        }
+
+        const date = await getImageDate(fileToProcess);
+        const url = await compressImage(fileToProcess);
 
         const nameBase = date
           ? `Foto do dia ${date}`
