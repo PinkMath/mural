@@ -300,14 +300,14 @@ const DevDashboard = ({ logout }: Props) => {
       </div>
 
       {/* Tab content */}
-      <div key={tab} className="animate-tab-enter">
+      <div className="animate-tab-enter">
 
-      {tab === 'upload' && (
-        <PhotoUploader
-        monthLabel={currentMonth.label}
-        onPhotosReady={handleUploadReady}
-        />
-      )}
+      <div className={tab === 'upload' ? 'block' : 'hidden'}>
+      <PhotoUploader
+      monthLabel={currentMonth.label}
+      onPhotosReady={handleUploadReady}
+      />
+      </div>
 
       {tab === 'add-url' && (
         <div className="bg-white/3 border border-white/8 p-4 md:p-5">

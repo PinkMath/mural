@@ -55,6 +55,10 @@ const PhotoGrid = ({ data, monthLabel }: { data: MonthPhoto[]; monthLabel: strin
           >
             <img
               src={photo.url}
+              loading="lazy"
+              decoding="async"
+              onLoad={(e) => e.currentTarget.classList.remove('opacity-0')}
+              onError={(e) => e.currentTarget.style.opacity = '0'}
               alt={photo.caption || monthLabel}
               className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             />
