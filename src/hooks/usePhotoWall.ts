@@ -9,14 +9,31 @@ export const usePhotoWall = () => {
 
   const muralRef = ref(db, 'mural_data');
 
+  const normalizeMonths = (data: any): MonthData[] => {
+    const source = Array.isArray(data) ? data : initialPhotoWall;
+
+    return initialPhotoWall.map((defaultMonth, index) => {
+      const firebaseMonth = source[index];
+
+      return {
+        ...defaultMonth,
+        ...firebaseMonth,
+        photos: Array.isArray(firebaseMonth?.photos)
+          ? firebaseMonth.photos
+          : [],
+      };
+    });
+  };
+
   useEffect(() => {
     const unsubscribe = onValue(muralRef, async (snapshot) => {
       const data = snapshot.val();
 
       if (data) {
-        setMonths(data);
+        setMonths(normalizeMonths(data));
       } else {
         await set(muralRef, initialPhotoWall);
+        setMonths(initialPhotoWall);
       }
 
       setLoading(false);
@@ -27,8 +44,8 @@ export const usePhotoWall = () => {
 
   const updateFirebase = useCallback(async (updater: (prev: MonthData[]) => MonthData[]) => {
     const snapshot = await get(muralRef);
-    const currentData = snapshot.val() || initialPhotoWall;
-    const updatedData = updater(currentData);
+    const currentData = normalizeMonths(snapshot.val());
+    const updatedData = normalizeMonths(updater(currentData));
 
     await set(muralRef, updatedData);
   }, []);
@@ -37,7 +54,7 @@ export const usePhotoWall = () => {
     updateFirebase((prev) =>
       prev.map((m, i) =>
         i === monthIndex
-          ? { ...m, photos: [...m.photos, photo] }
+          ? { ...m, photos: [...(m.photos ?? []), photo] }
           : m
       )
     );
@@ -47,7 +64,7 @@ export const usePhotoWall = () => {
     updateFirebase((prev) =>
       prev.map((m, i) =>
         i === monthIndex
-          ? { ...m, photos: [...m.photos, ...photos] }
+          ? { ...m, photos: [...(m.photos ?? []), ...photos] }
           : m
       )
     );
@@ -57,7 +74,7 @@ export const usePhotoWall = () => {
     updateFirebase((prev) =>
       prev.map((m, i) =>
         i === monthIndex
-          ? { ...m, photos: m.photos.filter((p) => p.id !== photoId) }
+          ? { ...m, photos: (m.photos ?? []).filter((p) => p.id !== photoId) }
           : m
       )
     );
@@ -69,7 +86,7 @@ export const usePhotoWall = () => {
         i === monthIndex
           ? {
               ...m,
-              photos: m.photos.map((p) =>
+              photos: (m.photos ?? []).map((p) =>
                 p.id === photoId ? { ...p, ...updates } : p
               ),
             }
@@ -83,7 +100,7 @@ export const usePhotoWall = () => {
   }, []);
 
   const restoreBackup = useCallback((data: MonthData[]) => {
-    set(muralRef, data);
+    set(muralRef, normalizeMonths(data));
   }, []);
 
   return {

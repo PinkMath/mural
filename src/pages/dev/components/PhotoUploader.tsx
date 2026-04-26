@@ -103,7 +103,11 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
 
       try {
         const url = await compressImage(imageFiles[i]);
-        const nameBase = imageFiles[i].name.replace(/\.[^.]+$/, '');
+        const date = await getImageDate(imageFiles[i]);
+
+        const nameBase = date
+          ? `Foto do dia ${date}`
+          : imageFiles[i].name.replace(/\.[^.]+$/, '');
 
         batch.push({
           id: crypto.randomUUID(),

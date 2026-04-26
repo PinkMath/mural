@@ -1,7 +1,28 @@
 import { uploadToCloudinary } from "@/lib/cloudinary";
+import * as exifr from 'exifr';
 
 export const isImageFile = (filename: string): boolean => {
   return /\.(jpg|jpeg|png|webp)$/i.test(filename);
+};
+
+const getImageDate = async (file: File): Promise<string | null> => {
+  try {
+    const data = await exifr.parse(file);
+
+    if (!data) return null;
+
+    const date: Date | undefined = data.DateTimeOriginal || data.CreateDate;
+
+    if (!date) return null;
+
+    // Formato BR: DD/MM
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+
+    return `${day}/${month}/${date.getFullYear()}`;
+  } catch {
+    return null;
+  }
 };
 
 const convertToWebP = (file: File, quality = 0.8): Promise<File> => {
