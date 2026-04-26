@@ -43,7 +43,7 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
   };
 
   const validateFiles = (files: File[]) => {
-    const imageFiles = files.filter((f) => isImageFile(f.name));
+    const imageFiles = files.filter((f) => isImageFile(f.name) && f.type.startsWith('image/'));
 
     if (imageFiles.length === 0) {
       return {
@@ -102,12 +102,14 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
       updateProgress(i, 'processing');
 
       try {
-        const url = await compressImage(imageFiles[i]);
-        const date = await getImageDate(imageFiles[i]);
+        const file = imageFiles[i];
+
+        const date = await getImageDate(file);
+        const url = await compressImage(file);
 
         const nameBase = date
           ? `Foto do dia ${date}`
-          : imageFiles[i].name.replace(/\.[^.]+$/, '');
+          : file.name.replace(/\.[^.]+$/, '');
 
         batch.push({
           id: crypto.randomUUID(),
