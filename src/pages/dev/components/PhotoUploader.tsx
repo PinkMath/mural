@@ -453,7 +453,7 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
       )}
 
       <p className="text-white/10 text-[10px] mt-3 leading-relaxed">
-        Formatos aceitos: JPG, PNG, WEBP, GIF &nbsp;·&nbsp; Limite: até {MAX_FILES} imagens ou {MAX_TOTAL_SIZE_GB}GB por envio &nbsp;·&nbsp; Convertidas automaticamente para WebP &nbsp;·&nbsp; Salvas aos poucos para evitar travar
+        Formatos aceitos: HEIC, JPG, PNG, WEBP, GIF &nbsp;·&nbsp; Limite: até {MAX_FILES} imagens ou {MAX_TOTAL_SIZE_GB}GB por envio &nbsp;·&nbsp; Convertidas automaticamente para WebP &nbsp;·&nbsp; Salvas aos poucos para evitar travar
       </p>
     </div>
   );

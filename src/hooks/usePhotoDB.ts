@@ -1,8 +1,29 @@
 import { uploadToCloudinary } from "@/lib/cloudinary";
+import heic2any from "heic2any";
 import * as exifr from 'exifr';
 
 export const isImageFile = (filename: string): boolean => {
-  return /\.(jpg|jpeg|png|webp)$/i.test(filename);
+  return /\.(jpg|jpeg|png|webp|gif|heic|heif)$/i.test(filename);
+};
+
+const isHeicFile = (file: File): boolean => {
+  return /\.(heic|heif)$/i.test(file.name);
+};
+
+const convertHeicToJpeg = async (file: File): Promise<File> => {
+  const convertedBlob = await heic2any({
+    blob: file,
+    toType: "image/jpeg",
+    quality: 0.85,
+  });
+
+  const blob = Array.isArray(convertedBlob) ? convertedBlob[0] : convertedBlob;
+
+  return new File(
+    [blob],
+    file.name.replace(/\.(heic|heif)$/i, ".jpg"),
+    { type: "image/jpeg" }
+  );
 };
 
 export const getImageDate = async (file: File): Promise<string | null> => {
@@ -53,7 +74,7 @@ const convertToWebP = (file: File, quality = 0.8): Promise<File> => {
 
           const webpFile = new File(
             [blob],
-            file.name.replace(/\.(jpg|jpeg|png|webp)$/i, ".webp"),
+            file.name.replace(/\.(jpg|jpeg|png|webp|gif|heic|heif)$/i, ".webp"),
             { type: "image/webp" }
           );
 
@@ -74,6 +95,11 @@ const convertToWebP = (file: File, quality = 0.8): Promise<File> => {
 };
 
 export const compressImage = async (file: File): Promise<string> => {
-  const webpFile = await convertToWebP(file, 0.8);
+  const fileToProcess = isHeicFile(file)
+    ? await convertHeicToJpeg(file)
+    : file;
+
+  const webpFile = await convertToWebP(fileToProcess, 0.8);
+
   return await uploadToCloudinary(webpFile);
 };
