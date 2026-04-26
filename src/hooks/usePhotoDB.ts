@@ -7,19 +7,13 @@ export const isImageFile = (filename: string): boolean => {
 
 export const getImageDate = async (file: File): Promise<string | null> => {
   try {
-    const data = await exifr.parse(file);
+    const data = await exifr.parse(file, ["DateTimeOriginal", "CreateDate"]);
 
-    if (!data) return null;
-
-    const date: Date | undefined = data.DateTimeOriginal || data.CreateDate;
+    const date: Date | undefined = data?.DateTimeOriginal || data?.CreateDate;
 
     if (!date) return null;
 
-    // Formato BR: DD/MM
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-
-    return `${day}/${month}/${date.getFullYear()}`;
+    return date.toLocaleDateString("pt-BR");
   } catch {
     return null;
   }

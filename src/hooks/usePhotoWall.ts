@@ -96,7 +96,7 @@ export const usePhotoWall = () => {
   }, [updateFirebase]);
 
   const resetToDefault = useCallback(() => {
-    set(muralRef, initialPhotoWall);
+    set(muralRef, normalizeMonths(initialPhotoWall));
   }, []);
 
   const restoreBackup = useCallback((data: MonthData[]) => {

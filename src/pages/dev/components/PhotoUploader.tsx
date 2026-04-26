@@ -111,14 +111,14 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
           ? `Foto do dia ${date}`
           : file.name.replace(/\.[^.]+$/, '');
 
-        batch.push({
-          id: crypto.randomUUID(),
-          url,
-          caption: nameBase,
-        });
+          batch.push({
+            id: crypto.randomUUID(),
+            url,
+            caption: nameBase,
+          });
 
-        successCount++;
-        updateProgress(i, 'done');
+          successCount++;
+          updateProgress(i, 'done');
 
         if (batch.length >= SAVE_BATCH_SIZE) {
           saveBatch(batch);
@@ -208,8 +208,12 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
           const blob = await entry.async('blob');
           const imageFile = new File([blob], filename, { type: blob.type || 'image/jpeg' });
 
+          const date = await getImageDate(imageFile);
           const url = await compressImage(imageFile);
-          const nameBase = filename.replace(/\.[^.]+$/, '');
+
+          const nameBase = date
+            ? `Foto do dia ${date}`
+            : filename.replace(/\.[^.]+$/, '');
 
           batch.push({
             id: crypto.randomUUID(),
