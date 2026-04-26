@@ -65,7 +65,7 @@ const DevDashboard = ({ logout }: Props) => {
     }
 
     addPhoto(activeMonth, {
-      id: `url-${Date.now()}`,
+      id: crypto.randomUUID(),
       url: addUrl.trim(),
       caption: addCaption.trim() || undefined,
     });
