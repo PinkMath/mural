@@ -1,6 +1,6 @@
 import { useRef, useState, DragEvent } from 'react';
 import JSZip from 'jszip';
-import { compressImage, isImageFile } from '@/hooks/usePhotoDB';
+import { compressImage, isImageFile, getImageDate } from '@/hooks/usePhotoDB';
 import { MonthPhoto } from '@/mocks/photoWall';
 
 interface Props {

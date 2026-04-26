@@ -5,7 +5,7 @@ export const isImageFile = (filename: string): boolean => {
   return /\.(jpg|jpeg|png|webp)$/i.test(filename);
 };
 
-const getImageDate = async (file: File): Promise<string | null> => {
+export const getImageDate = async (file: File): Promise<string | null> => {
   try {
     const data = await exifr.parse(file);
 
