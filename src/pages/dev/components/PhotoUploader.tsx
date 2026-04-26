@@ -43,13 +43,13 @@ const PhotoUploader = ({ monthLabel, onPhotosReady }: Props) => {
   };
 
   const validateFiles = (files: File[]) => {
-    const imageFiles = files.filter((f) => isImageFile(f.name) && f.type.startsWith('image/'));
+    const imageFiles = files.filter((f) => isImageFile(f.name));
 
     if (imageFiles.length === 0) {
       return {
         ok: false,
         imageFiles: [],
-        message: 'Nenhuma imagem encontrada. Formatos aceitos: JPG, PNG, WEBP, GIF.',
+        message: 'Nenhuma imagem encontrada. Formatos aceitos: HEIC, JPG, PNG, WEBP, GIF.',
       };
     }
 
