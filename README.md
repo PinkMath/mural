@@ -2,7 +2,7 @@
 
 Um mural fotográfico interativo e elegante, desenvolvido para imortalizar momentos especiais. O projeto consome dados em tempo real do **Firebase Realtime Database**, com foco em performance mobile e design minimalista.
 
-# Veja o site [aqui](https://pinkmath.github.io/mural/)
+# Veja o site [aqui](https://loavy.github.io/mural/)
 
 ## ✨ Funcionalidades
 
